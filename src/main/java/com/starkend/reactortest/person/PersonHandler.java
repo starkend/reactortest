@@ -2,8 +2,10 @@ package com.starkend.reactortest.person;
 
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.boot.autoconfigure.rsocket.RSocketProperties;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
@@ -29,8 +31,10 @@ public class PersonHandler {
     }
 
     public Mono<ServerResponse> createPerson(ServerRequest request) {
-        return request.bodyToMono(Person.class)
-                .doOnNext(repository::save)
-                .then(ok().build());
+        Person person = new Person(Long.valueOf(request.queryParam("id").get()), request.queryParam("name").get());
+
+        Mono<Person> savePerson = repository.save(person);
+
+        return ok().contentType(MediaType.APPLICATION_JSON).body(savePerson, Person.class);
     }
 }
