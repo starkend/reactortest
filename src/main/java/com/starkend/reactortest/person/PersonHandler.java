@@ -2,10 +2,8 @@ package com.starkend.reactortest.person;
 
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.boot.autoconfigure.rsocket.RSocketProperties;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
