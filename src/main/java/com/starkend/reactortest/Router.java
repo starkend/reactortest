@@ -18,5 +18,7 @@ public class Router {
     }
 
     @Bean
-    RouterFunction<ServerResponse> route() { return personRouter.personRouter();}
+    RouterFunction<ServerResponse> route() {
+        return personRouter.personRouter();
+    }
 }

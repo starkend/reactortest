@@ -8,8 +8,8 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 @EnableReactiveMongoRepositories
 public class ReactortestApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ReactortestApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ReactortestApplication.class, args);
+    }
 
 }
