@@ -23,8 +23,8 @@ public class PersonRouter {
     }
 
     public RouterFunction<ServerResponse> personRouter() {
-        return RouterFunctions.route(GET("/people").and(accept(MediaType.APPLICATION_JSON)), personHandler::listPeople)
-                .andRoute(GET("/createPerson").and(accept(MediaType.APPLICATION_JSON)), personHandler::createPerson)
-                .andRoute(GET("/getPersonById").and(accept(MediaType.APPLICATION_JSON)), personHandler::getPersonById);
+        return RouterFunctions.route(GET("person/all").and(accept(MediaType.APPLICATION_JSON)), personHandler::listPeople)
+                .andRoute(GET("person/create").and(accept(MediaType.APPLICATION_JSON)), personHandler::createPerson)
+                .andRoute(GET("person/getById").and(accept(MediaType.APPLICATION_JSON)), personHandler::getPersonById);
     }
 }
