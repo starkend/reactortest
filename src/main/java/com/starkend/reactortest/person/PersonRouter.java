@@ -24,6 +24,7 @@ public class PersonRouter {
 
     public RouterFunction<ServerResponse> personRouter() {
         return RouterFunctions.route(GET("/people").and(accept(MediaType.APPLICATION_JSON)), personHandler::listPeople)
-                .andRoute(GET("/createPerson").and(accept(MediaType.APPLICATION_JSON)), personHandler::createPerson);
+                .andRoute(GET("/createPerson").and(accept(MediaType.APPLICATION_JSON)), personHandler::createPerson)
+                .andRoute(GET("/getPersonById").and(accept(MediaType.APPLICATION_JSON)), personHandler::getPersonById);
     }
 }

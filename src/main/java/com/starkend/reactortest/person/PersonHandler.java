@@ -28,6 +28,13 @@ public class PersonHandler {
         return ok().contentType(MediaType.APPLICATION_JSON).body(people, Person.class);
     }
 
+    public Mono<ServerResponse> getPersonById(ServerRequest request) {
+        String id = request.queryParam("id").get();
+        Mono<Person> person = repository.findById(Long.valueOf(id));
+
+        return ok().contentType(MediaType.APPLICATION_JSON).body(person, Person.class);
+    }
+
     public Mono<ServerResponse> createPerson(ServerRequest request) {
         Person person = new Person(Long.valueOf(request.queryParam("id").get()), request.queryParam("name").get());
 
