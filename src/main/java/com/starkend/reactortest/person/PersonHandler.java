@@ -18,6 +18,9 @@ public class PersonHandler {
 
     private final PersonRepository repository;
 
+    private static final String NAME_PARAM = "name";
+    private static final String ID_PARAM = "id";
+
     public PersonHandler(PersonRepository repository) {
         this.repository = repository;
     }
@@ -29,14 +32,14 @@ public class PersonHandler {
     }
 
     public Mono<ServerResponse> getPersonById(ServerRequest request) {
-        String id = request.queryParam("id").get();
+        String id = request.queryParam(ID_PARAM).get();
         Mono<Person> person = repository.findById(Long.valueOf(id));
 
         return ok().contentType(MediaType.APPLICATION_JSON).body(person, Person.class);
     }
 
     public Mono<ServerResponse> createPerson(ServerRequest request) {
-        Person person = new Person(Long.valueOf(request.queryParam("id").get()), request.queryParam("name").get());
+        Person person = new Person(Long.valueOf(request.queryParam(ID_PARAM).get()), request.queryParam(NAME_PARAM).get());
 
         Mono<Person> savePerson = repository.save(person);
 
