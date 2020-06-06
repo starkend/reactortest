@@ -45,4 +45,11 @@ public class PersonHandler {
 
         return ok().contentType(MediaType.APPLICATION_JSON).body(savePerson, Person.class);
     }
+
+    public Mono<ServerResponse> existsById(ServerRequest request) {
+        String id = request.queryParam(ID_PARAM).get();
+        Mono<Boolean> exists = repository.existsById(Long.valueOf(id));
+
+        return ok().contentType(MediaType.APPLICATION_JSON).body(exists, Boolean.class);
+    }
 }
