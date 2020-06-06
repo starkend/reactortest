@@ -27,6 +27,7 @@ public class PersonRouter {
                 .andRoute(GET("person/create").and(accept(MediaType.APPLICATION_JSON)), personHandler::createPerson)
                 .andRoute(GET("person/getById").and(accept(MediaType.APPLICATION_JSON)), personHandler::getPersonById)
                 .andRoute(GET("person/existsById").and(accept(MediaType.APPLICATION_JSON)), personHandler::existsById)
-                .andRoute(GET("person/count").and(accept(MediaType.APPLICATION_JSON)), personHandler::count);
+                .andRoute(GET("person/count").and(accept(MediaType.APPLICATION_JSON)), personHandler::count)
+                .andRoute(GET("person/deleteById").and(accept(MediaType.APPLICATION_JSON)), personHandler::deleteById);
     }
 }

@@ -58,4 +58,11 @@ public class PersonHandler {
 
         return ok().contentType(MediaType.APPLICATION_JSON).body(count, Long.class);
     }
+
+    public Mono<ServerResponse> deleteById(ServerRequest request) {
+        String id = request.queryParam(ID_PARAM).get();
+        Mono<Void> result = repository.deleteById(Long.valueOf(id));
+
+        return ok().contentType(MediaType.APPLICATION_JSON).body(result, Void.class);
+    }
 }
