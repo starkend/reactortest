@@ -52,4 +52,10 @@ public class PersonHandler {
 
         return ok().contentType(MediaType.APPLICATION_JSON).body(exists, Boolean.class);
     }
+
+    public Mono<ServerResponse> count(ServerRequest request) {
+        Mono<Long> count = repository.count();
+
+        return ok().contentType(MediaType.APPLICATION_JSON).body(count, Long.class);
+    }
 }
