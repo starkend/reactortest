@@ -2,7 +2,6 @@ package com.starkend.reactortest.person;
 
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -17,10 +16,9 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 @Component
 public class PersonHandler {
 
-    private final PersonRepository repository;
-
     private static final String NAME_PARAM = "name";
     private static final String ID_PARAM = "id";
+    private final PersonRepository repository;
 
     public PersonHandler(PersonRepository repository) {
         this.repository = repository;
