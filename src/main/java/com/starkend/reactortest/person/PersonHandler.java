@@ -2,6 +2,7 @@ package com.starkend.reactortest.person;
 
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -29,6 +30,12 @@ public class PersonHandler {
         Flux<Person> people = repository.findAll();
 
         return ok().contentType(MediaType.APPLICATION_JSON).body(people, Person.class);
+    }
+
+    public Mono<ServerResponse> getAllUserNames(ServerRequest request) {
+        Flux<String> people = repository.findAll().map(
+                person -> String.format("%s ", person.getName()));
+        return ok().contentType(MediaType.APPLICATION_JSON).body(people, String.class);
     }
 
     public Mono<ServerResponse> getPersonById(ServerRequest request) {
