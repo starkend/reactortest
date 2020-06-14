@@ -46,9 +46,9 @@ public class PersonHandler {
     public Mono<ServerResponse> createPerson(ServerRequest request) {
         Person person = new Person(Long.valueOf(request.queryParam(ID_PARAM).get()), request.queryParam(NAME_PARAM).get());
 
-        Mono<Person> savePerson = repository.save(person);
-
-        return ok().contentType(MediaType.APPLICATION_JSON).body(savePerson, Person.class);
+        return repository.save(person)
+                .flatMap(savedPerson -> ok().contentType(MediaType.APPLICATION_JSON).bodyValue(savedPerson))
+                .switchIfEmpty(ServerResponse.unprocessableEntity().build());
     }
 
     public Mono<ServerResponse> existsById(ServerRequest request) {
