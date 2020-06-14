@@ -38,9 +38,9 @@ public class PersonHandler {
 
     public Mono<ServerResponse> getPersonById(ServerRequest request) {
         String id = request.queryParam(ID_PARAM).get();
-        Mono<Person> person = repository.findById(Long.valueOf(id));
-
-        return ok().contentType(MediaType.APPLICATION_JSON).body(person, Person.class);
+        return repository.findById(Long.valueOf(id))
+                .flatMap(person -> ok().contentType(MediaType.APPLICATION_JSON).bodyValue(person))
+                .switchIfEmpty(ServerResponse.notFound().build());
     }
 
     public Mono<ServerResponse> createPerson(ServerRequest request) {
