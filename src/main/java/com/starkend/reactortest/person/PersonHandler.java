@@ -36,6 +36,13 @@ public class PersonHandler {
         return ok().contentType(MediaType.APPLICATION_JSON).body(people, String.class);
     }
 
+    public Mono<ServerResponse> getAllUserIds(ServerRequest request) {
+        Flux<Long> ids = repository.findAll().map(
+                id -> id.getId());
+
+        return ok().contentType(MediaType.APPLICATION_JSON).body(ids, Long.class);
+    }
+
     public Mono<ServerResponse> getPersonById(ServerRequest request) {
         String id = request.queryParam(ID_PARAM).get();
         return repository.findById(Long.valueOf(id))
