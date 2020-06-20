@@ -25,6 +25,7 @@ public class PersonRouter {
     public RouterFunction<ServerResponse> personRouter() {
         return RouterFunctions.route(GET("person/all").and(accept(MediaType.APPLICATION_JSON)), personHandler::listPeople)
                 .andRoute(GET("person/allIds").and(accept(MediaType.APPLICATION_JSON)), personHandler::getAllUserIds)
+                .andRoute(GET("person/allInfo").and(accept(MediaType.APPLICATION_JSON)), personHandler::getAllUserInfoFormatted)
                 .andRoute(GET("person/names").and(accept(MediaType.APPLICATION_JSON)), personHandler::getAllUserNames)
                 .andRoute(GET("person/create").and(accept(MediaType.APPLICATION_JSON)), personHandler::createPerson)
                 .andRoute(GET("person/getById").and(accept(MediaType.APPLICATION_JSON)), personHandler::getPersonById)

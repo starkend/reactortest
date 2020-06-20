@@ -30,6 +30,12 @@ public class PersonHandler {
         return ok().contentType(MediaType.APPLICATION_JSON).body(people, Person.class);
     }
 
+    public Mono<ServerResponse> getAllUserInfoFormatted(ServerRequest request) {
+        Flux<String> userInfo = repository.findAll().map(
+                user -> String.format("%s-%s  ", user.getId(), user.getName()));
+        return ok().contentType(MediaType.APPLICATION_JSON).body(userInfo, String.class);
+    }
+
     public Mono<ServerResponse> getAllUserNames(ServerRequest request) {
         Flux<String> people = repository.findAll().map(
                 person -> String.format("%s ", person.getName()));
