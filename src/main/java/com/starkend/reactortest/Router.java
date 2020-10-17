@@ -22,6 +22,6 @@ public class Router {
 
     @Bean
     RouterFunction<ServerResponse> route() {
-        return RouterFunctions.nest(path("/person"),personRouter.personRouter());
+        return RouterFunctions.nest(path("/person"), personRouter.personRouter());
     }
 }
