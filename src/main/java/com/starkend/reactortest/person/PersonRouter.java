@@ -23,14 +23,14 @@ public class PersonRouter {
     }
 
     public RouterFunction<ServerResponse> personRouter() {
-        return RouterFunctions.route(GET("person/all").and(accept(MediaType.APPLICATION_JSON)), personHandler::listPeople)
-                .andRoute(GET("person/allIds").and(accept(MediaType.APPLICATION_JSON)), personHandler::getAllUserIds)
-                .andRoute(GET("person/allInfo").and(accept(MediaType.APPLICATION_JSON)), personHandler::getAllUserInfoFormatted)
-                .andRoute(GET("person/names").and(accept(MediaType.APPLICATION_JSON)), personHandler::getAllUserNames)
-                .andRoute(GET("person/create").and(accept(MediaType.APPLICATION_JSON)), personHandler::createPerson)
-                .andRoute(GET("person/getById").and(accept(MediaType.APPLICATION_JSON)), personHandler::getPersonById)
-                .andRoute(GET("person/existsById").and(accept(MediaType.APPLICATION_JSON)), personHandler::existsById)
-                .andRoute(GET("person/count").and(accept(MediaType.APPLICATION_JSON)), personHandler::count)
-                .andRoute(GET("person/deleteById").and(accept(MediaType.APPLICATION_JSON)), personHandler::deleteById);
+        return RouterFunctions.route(GET("/all").and(accept(MediaType.APPLICATION_JSON)), personHandler::listPeople)
+                .andRoute(GET("/allIds").and(accept(MediaType.APPLICATION_JSON)), personHandler::getAllUserIds)
+                .andRoute(GET("/allInfo").and(accept(MediaType.APPLICATION_JSON)), personHandler::getAllUserInfoFormatted)
+                .andRoute(GET("/names").and(accept(MediaType.APPLICATION_JSON)), personHandler::getAllUserNames)
+                .andRoute(GET("/create").and(accept(MediaType.APPLICATION_JSON)), personHandler::createPerson)
+                .andRoute(GET("/getById").and(accept(MediaType.APPLICATION_JSON)), personHandler::getPersonById)
+                .andRoute(GET("/existsById").and(accept(MediaType.APPLICATION_JSON)), personHandler::existsById)
+                .andRoute(GET("/count").and(accept(MediaType.APPLICATION_JSON)), personHandler::count)
+                .andRoute(GET("/deleteById").and(accept(MediaType.APPLICATION_JSON)), personHandler::deleteById);
     }
 }
