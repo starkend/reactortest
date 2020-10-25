@@ -2,6 +2,8 @@ package com.starkend.reactortest.person;
 
 import lombok.Data;
 import lombok.extern.log4j.Log4j2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -19,13 +21,18 @@ public class PersonHandler {
     private static final String NAME_PARAM = "name";
     private static final String ID_PARAM = "id";
     private final PersonRepository repository;
+    private static final Logger LOG = LoggerFactory.getLogger(PersonHandler.class);
 
     public PersonHandler(PersonRepository repository) {
         this.repository = repository;
     }
 
     public Mono<ServerResponse> listPeople(ServerRequest request) {
-        return ok().contentType(MediaType.APPLICATION_JSON).body(repository.findAll(), Person.class);
+        return ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(repository.findAll()
+                        .doOnNext(p -> LOG.info(p.toString()))
+                        , Person.class);
     }
 
     public Mono<ServerResponse> getAllUserInfoFormatted(ServerRequest request) {
