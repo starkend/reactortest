@@ -20,8 +20,8 @@ public class PersonHandler {
 
     private static final String NAME_PARAM = "name";
     private static final String ID_PARAM = "id";
-    private final PersonRepository repository;
     private static final Logger LOG = LoggerFactory.getLogger(PersonHandler.class);
+    private final PersonRepository repository;
 
     public PersonHandler(PersonRepository repository) {
         this.repository = repository;
@@ -31,7 +31,7 @@ public class PersonHandler {
         return ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(repository.findAll()
-                        .doOnNext(p -> LOG.info(p.toString()))
+                                .doOnNext(p -> LOG.info(p.toString()))
                         , Person.class);
     }
 
@@ -48,8 +48,10 @@ public class PersonHandler {
     }
 
     public Mono<ServerResponse> getAllUserIds(ServerRequest request) {
-        Flux<Long> ids = repository.findAll().map(
-                id -> id.getId());
+        Flux<Long> ids = repository.findAll()
+                .doOnNext(p -> LOG.info(p.toString()))
+                .map(
+                        id -> id.getId());
 
         return ok().contentType(MediaType.APPLICATION_JSON).body(ids, Long.class);
     }
