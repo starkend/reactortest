@@ -25,9 +25,7 @@ public class PersonHandler {
     }
 
     public Mono<ServerResponse> listPeople(ServerRequest request) {
-        Flux<Person> people = repository.findAll();
-
-        return ok().contentType(MediaType.APPLICATION_JSON).body(people, Person.class);
+        return ok().contentType(MediaType.APPLICATION_JSON).body(repository.findAll(), Person.class);
     }
 
     public Mono<ServerResponse> getAllUserInfoFormatted(ServerRequest request) {
@@ -72,9 +70,7 @@ public class PersonHandler {
     }
 
     public Mono<ServerResponse> count(ServerRequest request) {
-        Mono<Long> count = repository.count();
-
-        return ok().contentType(MediaType.APPLICATION_JSON).body(count, Long.class);
+        return ok().contentType(MediaType.APPLICATION_JSON).body(repository.count(), Long.class);
     }
 
     public Mono<ServerResponse> deleteById(ServerRequest request) {
